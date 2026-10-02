@@ -1,0 +1,16 @@
+## Chapter 11: Monitoring, Backup, and Site Recovery — Flashcards
+
+| # | Front (Question) | Back (Answer) |
+|---|-----------------|---------------|
+| 1 | Azure Monitor platform Metrics — how many days retained in Metrics Explorer? | 93 days. Exam tip: Metrics = near real-time, short retention. For long-term trend analysis, route metrics to Log Analytics via diagnostic settings. |
+| 2 | Log Analytics workspace default data retention? | 30 days by default. Interactive retention can be extended up to 730 days (2 years) per workspace or per table. Exam tip: default retention is a common trick answer trap (students assume 90 days). |
+| 3 | Azure VM Backup — default instant restore snapshot retention? | 2 days (configurable range 1-5 days). Exam tip: instant restore uses local disk snapshots for fast recovery before data moves to the vault. |
+| 4 | Recovery Services vault soft delete retention period? | 14 days. Now mandatory (cannot be disabled) to protect against accidental/malicious backup deletion. Exam tip: soft delete ≠ instant restore — different features, different retention windows. |
+| 5 | Action group SMS notification throttle limit? | 1 SMS per 5 minutes to the same phone number, to prevent alert storms/spam. Exam tip: email and voice have separate throttling behavior — SMS is the one most tested. |
+| 6 | Azure Backup vs Azure Site Recovery — core distinction? | Azure Backup = data protection (point-in-time restore of files/VMs/data). Azure Site Recovery = disaster recovery (replicates workloads to another region and orchestrates failover with defined RPO/RTO). Exam tip: 'restore lost data' → Backup; 'survive a region outage' → ASR. |
+| 7 | Azure Monitor Metrics vs Log Analytics logs — when to use each? | Metrics: near real-time numeric time series, fast alerting, low latency, 93-day retention. Logs: structured records queried with KQL, richer analysis, ingestion delay of a few minutes, longer retention. Exam tip: 'alert within seconds' → Metrics; 'correlate multiple data sources' → Logs. |
+| 8 | NSG Flow Logs vs VNet Flow Logs? | NSG Flow Logs (v2) capture traffic per network security group; being phased out. VNet Flow Logs are the newer replacement, capturing traffic at the virtual network/subnet level with broader coverage. Exam tip: know both exist — AZ-104 objectives still reference NSG flow logs. |
+| 9 | Basic KQL query pipeline order? | TableName \| where <filter> \| summarize <aggregation> by <grouping> \| project <columns> \| order by <sort>. Exam tip: 'where' before 'summarize'; KQL has no 'group by' clause. |
+| 10 | KQL syntax to bucket results into 5-minute time intervals? | summarize count() by bin(TimeGenerated, 5m). Exam tip: bin() is always used inside summarize's 'by' clause for time-series bucketing. |
+| 11 | What is stored inside a Recovery Services vault? | Both Azure Backup recovery points AND Azure Site Recovery replication configuration/data — one vault type serves both features. Exam tip: don't assume separate vaults are required for Backup vs ASR. |
+| 12 | Log Analytics pricing — pay-as-you-go vs commitment tiers? | Pay-as-you-go bills per GB ingested. Commitment tiers (starting at 100 GB/day) offer a discounted per-GB rate for predictable high-volume ingestion. Exam tip: recommend commitment tiers when ingestion consistently exceeds ~100 GB/day. |
